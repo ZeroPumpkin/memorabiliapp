@@ -1,0 +1,10 @@
+body {
+  background-color: white;
+  color: black;
+  font-family: graphik, Arial, sans-serif;
+  font-size: 34px;
+}
+
+headline-image {
+  max-height: 300px;
+}

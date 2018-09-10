@@ -1,5 +1,7 @@
 'use strict';
 
+const request = require('request');
+
 let artists = new Array(
 	"Mick Hucknall",
   "Joss Stone",
@@ -319,20 +321,29 @@ function possessive(word) {
   }
 }
 
-function setImageForPhrase(phrase) {
+function getImageForPhrase(phrase) {
 	console.log("getting image for phrase " + phrase);
 
-	$.get("https://www.googleapis.com/customsearch/v1?cx=010825317578803827572%3Aewmrtaxo2-0&searchType=image&key=AIzaSyD1VaweEt2G9tHh6lwnvzxKZGpW3QavbWo&q=" + encodeURIComponent(phrase),
-      function(data, status) {
-      	if (status == "success") {
-          let image_res = random(data.items);
-          $('#image').attr("src", image_res.link);
-          console.log("got image result", image_res);
-        }
-        else {
-        	console.log(data, status);
-          $('#image').attr("src", null);
-        }
+	// $.get("https://www.googleapis.com/customsearch/v1?cx=010825317578803827572%3Aewmrtaxo2-0&searchType=image&key=AIzaSyD1VaweEt2G9tHh6lwnvzxKZGpW3QavbWo&q=" + encodeURIComponent(phrase),
+ //      function(data, status) {
+ //      	if (status == "success") {
+ //          let image_res = random(data.items);
+ //          return image_res.link;
+ //          console.log("got image result", image_res);
+ //        }
+ //        else {
+ //        	console.log(data, status);
+ //          return null;
+ //        }
+ //      }
+ //  );
+
+  request("https://www.googleapis.com/customsearch/v1?cx=010825317578803827572%3Aewmrtaxo2-0&searchType=image&key=AIzaSyD1VaweEt2G9tHh6lwnvzxKZGpW3QavbWo&q=" + encodeURIComponent(phrase),
+      {json: true}, (err, res, body) => { 
+        if (err) { return console.log(err); }
+
+        let image_res = random(body.items);
+        return image_res.link;
       }
   );
 }
@@ -346,28 +357,32 @@ function FormatArgs(array, is_possessive = false, is_plural = false, use_for_ima
 
 var pluralize = require('pluralize');
 
-String.prototype.format = function() {
-  let a = this;
+function getHeadlineObject(phrase) {
+  let a = phrase;
   
   let image_phrases = [];
   
   for (let k in arguments) {
-  	let token = "{" + k + "}";
+    if (k == 0) continue; // skip the first argument
+
+  	let token = "{" + (k - 1) + "}";
 
   	while (a.indexOf(token) != -1) {
-    	let replacement = random(arguments[k].array);
+      let arg = arguments[k];
+
+    	let replacement = random(arg.array);
       
-      console.log(arguments[k]);
+      console.log(arg);
       
-      if (arguments[k].is_possessive) {
+      if (arg.is_possessive) {
       	replacement = possessive(replacement);
       }
       
-      if (arguments[k].is_plural) {
+      if (arg.is_plural) {
       	replacement = pluralize(replacement);
       }
  
-      if (arguments[k].use_for_image) {
+      if (arg.use_for_image) {
 				image_phrases.push(replacement);
       }
       
@@ -378,7 +393,7 @@ String.prototype.format = function() {
   let image_phrase = random(image_phrases);
   console.log(image_phrase, image_phrases);
   
-  //setImageForPhrase(image_phrase);
+  let image_url = null; //getImageForPhrase(image_phrase);
   
   let init_lower_char = 0;
   if (a.charAt(0) == "'") {
@@ -389,13 +404,16 @@ String.prototype.format = function() {
   	a = "'" + a;
   }
   
-  return a;
+  return {
+    headline: a,
+    image_url: image_url
+  };
 }
 
 exports.getHeadline = function() {
   let headline = random(infos);
 
-  headline = headline.format(
+  let headline_obj = getHeadlineObject(headline, 
     new FormatArgs(artists, true),
     new FormatArgs(adjectives, undefined, undefined, false),
     new FormatArgs(items),
@@ -406,7 +424,9 @@ exports.getHeadline = function() {
     new FormatArgs(verbs_present, undefined, undefined, false)
   );
 
-  return headline;
+  console.log(headline_obj);
+
+  return headline_obj;
 }
 
 //$('#headline').text(headline);

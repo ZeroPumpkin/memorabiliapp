@@ -7,6 +7,9 @@ var express = require('express'),
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+app.set('views', './api/views');
+app.set('view engine', 'pug');
+
 
 var routes = require('./api/routes/headlineRoutes'); //importing route
 routes(app); //register the route
