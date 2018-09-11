@@ -14,7 +14,6 @@ let artists = new Array(
   "Mick Fleetwood",
   "Leon Jackson",
   "AIVIS",
-  "Mick Frost",
   "Gabrielle",
   "Eternal",
   "B*witched",
