@@ -183,7 +183,7 @@ let items = new Array(
   "cat's litter tray",
   "toothbrush",
   "ice lolly stick",
-  "toenail clippings",
+  "toenail clipping",
   "keytar",
   "banana",
   "hair",
