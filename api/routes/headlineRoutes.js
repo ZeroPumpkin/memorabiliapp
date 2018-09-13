@@ -4,4 +4,7 @@ module.exports = function(app) {
 
   app.route('/headline')
     .get(headline.getHeadline);
+
+  app.route('/headline/help')
+    .get(headline.getHelp);
 };

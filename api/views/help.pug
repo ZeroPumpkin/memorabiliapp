@@ -1,0 +1,17 @@
+html
+  head
+    title= title
+    style
+      include ../../headline.css
+  body
+    p Visit /headline to get a random headline. Optionally, supply a template string in the URL like:
+    p
+      i /headline?template=
+        b &lt;your_template_string_here&gt;
+    p Template placeholders
+    ul
+      each val in placeholder_docu
+        li= val
+    p Example: 
+      i /headline?template=
+        = example_template

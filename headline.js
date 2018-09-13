@@ -388,16 +388,25 @@ let infos = new Array(
   "EXCLUSIVE! {3} reveals {1} affair with {3}!",
   "Local boy, {5}, hailed as the next {3}."
 );
-// {0} = Random Name (possessive form)
-// {1} = Random Adjective
-// {2} = Random Item
-// {3} = Random Name
-// {4} = Random Item (plural form)
-// {5} = Random Number between 5 and 10
-// {6} = Random Verb
-// {7} = Random Verb (present participle)
 
 //////////////////////////////////////////////////////////////////////////////////////////
+exports.getPlaceholderDocu = function() {
+  return [
+    '{0} = Random Name (possessive form)',
+    '{1} = Random Adjective',
+    '{2} = Random Item',
+    '{3} = Random Name',
+    '{4} = Random Item (plural form)',
+    '{5} = Random Number between 5 and 10',
+    '{6} = Random Verb',
+    '{7} = Random Verb (present participle)'
+  ];
+}
+
+exports.getExampleTemplate = function() {
+  return random(infos);
+}
+
 function random(array) {
 	return array[Math.floor(Math.random() * array.length)];
 }
@@ -500,8 +509,8 @@ function getHeadlineObject(phrase) {
   };
 }
 
-exports.getHeadline = function() {
-  let headline = random(infos);
+exports.getHeadline = function(template) {
+  let headline = template != null ? template : random(infos);
 
   let headline_obj = getHeadlineObject(headline, 
     new FormatArgs(artists, true),
