@@ -62,7 +62,8 @@ let artists = new Array(
   "Elsa from Frozen",
   "Heidi Klum",
   "Sir Paul McCartney",
-  "the late Joan Rivers"  
+  "the late Joan Rivers",
+  "Darius Danesh"
 );
 
 let adjectives = new Array(
@@ -386,7 +387,8 @@ let infos = new Array(
   "Calculate how many {4} your bank owes you with this {1}, {3}-endorsed app!",
   "Brilliant doctor says {3} is MEDICAL MARVEL after removing {2} from previously undiscovered orifice!",
   "EXCLUSIVE! {3} reveals {1} affair with {3}!",
-  "Local boy, {5}, hailed as the next {3}."
+  "Local boy, {5}, hailed as the next {3}.",
+  "Furious {3} and {3} at loggerheads over Westminster’s {1} new policy on {4} {1} {2}."
 );
 
 //////////////////////////////////////////////////////////////////////////////////////////
