@@ -388,7 +388,7 @@ let infos = new Array(
   "Brilliant doctor says {3} is MEDICAL MARVEL after removing {2} from previously undiscovered orifice!",
   "EXCLUSIVE! {3} reveals {1} affair with {3}!",
   "Local boy, {5}, hailed as the next {3}.",
-  "Furious {3} and {3} at loggerheads over Westminster’s {1} new policy on {4} {1} {2}."
+  "Furious {3} and {3} at loggerheads over Westminster’s {1} new policy on {0} {1} {2}."
 );
 
 //////////////////////////////////////////////////////////////////////////////////////////
