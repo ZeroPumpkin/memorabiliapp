@@ -63,7 +63,8 @@ let artists = new Array(
   "Heidi Klum",
   "Sir Paul McCartney",
   "the late Joan Rivers",
-  "Darius Danesh"
+  "Darius Danesh",
+  "President Trumph"
 );
 
 let adjectives = new Array(
